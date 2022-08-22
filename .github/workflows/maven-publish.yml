@@ -4,8 +4,7 @@
 name: Package and publish to Github Packages
 
 on:
-  push:
-    branches: [ "feature/**" ]
+  push
 #  release:
 #    types: [created]
 

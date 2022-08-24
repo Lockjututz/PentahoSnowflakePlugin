@@ -1,11 +1,13 @@
 package org.inquidia.kettle.plugins.snowflakeplugin.bulkloader;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
 
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SnowflakeBulkLoaderTest {
@@ -55,5 +57,12 @@ class SnowflakeBulkLoaderTest {
         String source = "this is a " + SnowflakeBulkLoaderMeta.ENCLOSURE + "string";
         String searchStr = SnowflakeBulkLoaderMeta.ENCLOSURE;
         assertTrue(SnowflakeBulkLoader.searchForEscapableChar(source.getBytes(StandardCharsets.UTF_8), searchStr.getBytes(StandardCharsets.UTF_8), 10));
+    }
+
+    @Test
+    void searchForEscapableChar_csvEnclosureFails() {
+        String source = "this is a " + SnowflakeBulkLoaderMeta.ENCLOSURE + "string";
+        String searchStr = SnowflakeBulkLoaderMeta.ENCLOSURE;
+        assertFalse(SnowflakeBulkLoader.searchForEscapableChar(source.getBytes(StandardCharsets.UTF_8), searchStr.getBytes(StandardCharsets.UTF_8), 11));
     }
 }
